@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
-    "seed": "node backend/seed.js"
+    "seed": "node backend/seed.js",
+    "build": "node backend/seed.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": [
     "ecommerce",
