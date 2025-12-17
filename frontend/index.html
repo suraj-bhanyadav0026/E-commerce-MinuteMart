@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinuteMart - Your Futuristic Shopping Destination</title>
+    <meta name="description" content="MinuteMart - Experience the future of shopping with our premium e-commerce platform featuring electronics, fashion, groceries, and more.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <span class="loader-text">MinuteMart</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Minute<span class="logo-highlight">Mart</span></span>
+            </a>
+            
+            <div class="search-container">
+                <form class="search-form" id="searchForm">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for products, brands, categories..." autocomplete="off">
+                        <button type="button" class="voice-search" id="voiceSearch">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+                <div class="search-suggestions" id="searchSuggestions"></div>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <a href="#" class="nav-action" id="wishlistBtn" title="Wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="wishlistCount">0</span>
+                </a>
+                
+                <a href="#" class="nav-action" id="cartBtn" title="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </a>
+                
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" id="userBtn">
+                        <i class="fas fa-user"></i>
+                        <span class="user-name" id="userName">Account</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-guest" id="guestMenu">
+                            <a href="#" class="dropdown-item" data-page="login">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                            <a href="#" class="dropdown-item" data-page="signup">
+                                <i class="fas fa-user-plus"></i> Sign Up
+                            </a>
+                        </div>
+                        <div class="dropdown-user" id="loggedInMenu" style="display: none;">
+                            <a href="#" class="dropdown-item" data-page="dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            <a href="#" class="dropdown-item" data-page="orders">
+                                <i class="fas fa-box"></i> My Orders
+                            </a>
+                            <a href="#" class="dropdown-item" data-page="wishlist">
+                                <i class="fas fa-heart"></i> Wishlist
+                            </a>
+                            <a href="#" class="dropdown-item" data-page="profile">
+                                <i class="fas fa-user-cog"></i> Profile
+                            </a>
+                            <hr class="dropdown-divider">
+                            <button class="dropdown-item logout-btn" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <!-- Categories Bar -->
+        <div class="categories-bar">
+            <div class="categories-container">
+                <a href="#" class="category-link" data-category="electronics">
+                    <i class="fas fa-laptop"></i> Electronics
+                </a>
+                <a href="#" class="category-link" data-category="fashion">
+                    <i class="fas fa-tshirt"></i> Fashion
+                </a>
+                <a href="#" class="category-link" data-category="groceries">
+                    <i class="fas fa-apple-alt"></i> Groceries
+                </a>
+                <a href="#" class="category-link" data-category="home-living">
+                    <i class="fas fa-couch"></i> Home & Living
+                </a>
+                <a href="#" class="category-link" data-category="beauty-health">
+                    <i class="fas fa-spa"></i> Beauty & Health
+                </a>
+                <a href="#" class="category-link" data-category="sports-fitness">
+                    <i class="fas fa-dumbbell"></i> Sports & Fitness
+                </a>
+                <a href="#" class="category-link" data-category="books-stationery">
+                    <i class="fas fa-book"></i> Books
+                </a>
+                <a href="#" class="category-link" data-category="toys-games">
+                    <i class="fas fa-gamepad"></i> Toys & Games
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo-text">Minute<span class="logo-highlight">Mart</span></span>
+            <button class="close-menu" id="closeMobileMenu">&times;</button>
+        </div>
+        <div class="mobile-menu-content">
+            <div class="mobile-user-section" id="mobileUserSection">
+                <a href="#" class="mobile-menu-item" data-page="login">
+                    <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+                </a>
+            </div>
+            <div class="mobile-categories">
+                <h3>Categories</h3>
+                <a href="#" class="mobile-menu-item" data-category="electronics">
+                    <i class="fas fa-laptop"></i> Electronics
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="fashion">
+                    <i class="fas fa-tshirt"></i> Fashion
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="groceries">
+                    <i class="fas fa-apple-alt"></i> Groceries
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="home-living">
+                    <i class="fas fa-couch"></i> Home & Living
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="beauty-health">
+                    <i class="fas fa-spa"></i> Beauty & Health
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="sports-fitness">
+                    <i class="fas fa-dumbbell"></i> Sports & Fitness
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="books-stationery">
+                    <i class="fas fa-book"></i> Books
+                </a>
+                <a href="#" class="mobile-menu-item" data-category="toys-games">
+                    <i class="fas fa-gamepad"></i> Toys & Games
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Home Page -->
+        <section class="page home-page active" id="homePage">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="hero-background">
+                    <div class="hero-particles" id="heroParticles"></div>
+                    <div class="hero-gradient"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="hero-badge">🚀 The Future of Shopping</span>
+                        <h1 class="hero-title">
+                            <span class="title-line">Shop Smarter,</span>
+                            <span class="title-line gradient-text">Live Better</span>
+                        </h1>
+                        <p class="hero-description">
+                            Experience next-generation e-commerce with MinuteMart. Discover millions of products, 
+                            exclusive deals, and lightning-fast delivery.
+                        </p>
+                        <div class="hero-cta">
+                            <button class="btn btn-primary btn-glow" id="exploreBtn">
+                                <span>Explore Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-outline" id="dealsBtn">
+                                <i class="fas fa-bolt"></i>
+                                <span>Flash Deals</span>
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="50000">0</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="10000">0</span>
+                                <span class="stat-label">Happy Customers</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" data-count="500">0</span>
+                                <span class="stat-label">Brands</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="floating-cards">
+                            <div class="floating-card card-1">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300" alt="Product">
+                                <span class="card-discount">-30%</span>
+                            </div>
+                            <div class="floating-card card-2">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Product">
+                                <span class="card-discount">-50%</span>
+                            </div>
+                            <div class="floating-card card-3">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300" alt="Product">
+                                <span class="card-discount">-40%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Scroll to explore</span>
+                    <div class="scroll-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flash Sale Section -->
+            <section class="section flash-sale-section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-title-wrapper">
+                            <i class="fas fa-bolt flash-icon"></i>
+                            <h2 class="section-title">Flash <span class="gradient-text">Sale</span></h2>
+                        </div>
+                        <div class="countdown" id="flashCountdown">
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-separator">:</div>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-separator">:</div>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-btn" data-page="products" data-filter="flashSale=true">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="products-slider" id="flashSaleProducts">
+                        <!-- Products loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="section categories-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Shop by <span class="gradient-text">Category</span></h2>
+                        <p class="section-subtitle">Explore our wide range of categories</p>
+                    </div>
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Categories loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="section featured-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Featured <span class="gradient-text">Products</span></h2>
+                        <a href="#" class="view-all-btn" data-page="products" data-filter="featured=true">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="products-grid" id="featuredProducts">
+                        <!-- Products loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Banner Section -->
+            <section class="section banner-section">
+                <div class="container">
+                    <div class="promo-banners">
+                        <div class="promo-banner banner-large">
+                            <div class="banner-content">
+                                <span class="banner-tag">New Arrivals</span>
+                                <h3 class="banner-title">Latest Electronics</h3>
+                                <p class="banner-text">Up to 40% off on flagship smartphones & laptops</p>
+                                <button class="btn btn-primary" data-category="electronics">Shop Now</button>
+                            </div>
+                            <div class="banner-image">
+                                <img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=500" alt="Electronics">
+                            </div>
+                        </div>
+                        <div class="promo-banner banner-small">
+                            <div class="banner-content">
+                                <span class="banner-tag">Fashion Week</span>
+                                <h3 class="banner-title">Style Sale</h3>
+                                <p class="banner-text">Flat 50% off</p>
+                                <button class="btn btn-outline" data-category="fashion">Explore</button>
+                            </div>
+                        </div>
+                        <div class="promo-banner banner-small">
+                            <div class="banner-content">
+                                <span class="banner-tag">Fresh & Organic</span>
+                                <h3 class="banner-title">Groceries</h3>
+                                <p class="banner-text">Free Delivery</p>
+                                <button class="btn btn-outline" data-category="groceries">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Sellers -->
+            <section class="section bestsellers-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Best <span class="gradient-text">Sellers</span></h2>
+                        <div class="category-tabs">
+                            <button class="tab-btn active" data-tab="all">All</button>
+                            <button class="tab-btn" data-tab="electronics">Electronics</button>
+                            <button class="tab-btn" data-tab="fashion">Fashion</button>
+                            <button class="tab-btn" data-tab="home-living">Home</button>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="bestSellers">
+                        <!-- Products loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brands Section -->
+            <section class="section brands-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Top <span class="gradient-text">Brands</span></h2>
+                    </div>
+                    <div class="brands-slider">
+                        <div class="brand-item">Apple</div>
+                        <div class="brand-item">Samsung</div>
+                        <div class="brand-item">Sony</div>
+                        <div class="brand-item">Nike</div>
+                        <div class="brand-item">Adidas</div>
+                        <div class="brand-item">Dell</div>
+                        <div class="brand-item">Canon</div>
+                        <div class="brand-item">LEGO</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="section features-section">
+                <div class="container">
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <h3 class="feature-title">Free Shipping</h3>
+                            <p class="feature-text">On orders above ₹500</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-undo-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Easy Returns</h3>
+                            <p class="feature-text">30-day return policy</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Secure Payment</h3>
+                            <p class="feature-text">100% secure checkout</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3 class="feature-title">24/7 Support</h3>
+                            <p class="feature-text">Dedicated support team</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section class="section newsletter-section">
+                <div class="container">
+                    <div class="newsletter-card">
+                        <div class="newsletter-content">
+                            <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+                            <p class="newsletter-text">Get exclusive offers, new arrivals, and more delivered to your inbox.</p>
+                            <form class="newsletter-form" id="newsletterForm">
+                                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </form>
+                        </div>
+                        <div class="newsletter-decoration">
+                            <div class="decoration-circle"></div>
+                            <div class="decoration-circle"></div>
+                            <div class="decoration-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Products Page -->
+        <section class="page products-page" id="productsPage">
+            <div class="container">
+                <div class="page-header">
+                    <div class="breadcrumb">
+                        <a href="#" data-page="home">Home</a>
+                        <span>/</span>
+                        <span id="currentCategory">Products</span>
+                    </div>
+                    <h1 class="page-title" id="productsTitle">All Products</h1>
+                </div>
+                
+                <div class="products-layout">
+                    <!-- Filters Sidebar -->
+                    <aside class="filters-sidebar" id="filtersSidebar">
+                        <div class="filters-header">
+                            <h3>Filters</h3>
+                            <button class="clear-filters" id="clearFilters">Clear All</button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-title">Categories</h4>
+                            <div class="filter-options" id="categoryFilters">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-title">Price Range</h4>
+                            <div class="price-range">
+                                <input type="number" class="price-input" id="minPrice" placeholder="Min">
+                                <span>to</span>
+                                <input type="number" class="price-input" id="maxPrice" placeholder="Max">
+                            </div>
+                            <button class="apply-price-btn" id="applyPriceFilter">Apply</button>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-title">Brands</h4>
+                            <div class="filter-options" id="brandFilters">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <h4 class="filter-title">Rating</h4>
+                            <div class="rating-filters">
+                                <label class="rating-option">
+                                    <input type="radio" name="rating" value="4">
+                                    <span class="stars">★★★★☆</span> & Up
+                                </label>
+                                <label class="rating-option">
+                                    <input type="radio" name="rating" value="3">
+                                    <span class="stars">★★★☆☆</span> & Up
+                                </label>
+                            </div>
+                        </div>
+                    </aside>
+                    
+                    <!-- Products Grid -->
+                    <div class="products-main">
+                        <div class="products-toolbar">
+                            <button class="filter-toggle" id="filterToggle">
+                                <i class="fas fa-filter"></i> Filters
+                            </button>
+                            <span class="products-count" id="productsCount">0 products</span>
+                            <div class="sort-options">
+                                <select id="sortSelect" class="sort-select">
+                                    <option value="newest">Newest First</option>
+                                    <option value="price_low">Price: Low to High</option>
+                                    <option value="price_high">Price: High to Low</option>
+                                    <option value="rating">Highest Rated</option>
+                                    <option value="popularity">Most Popular</option>
+                                </select>
+                            </div>
+                            <div class="view-options">
+                                <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                                <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="products-grid" id="productsGrid">
+                            <!-- Products loaded dynamically -->
+                        </div>
+                        
+                        <div class="pagination" id="pagination">
+                            <!-- Pagination loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Detail Page -->
+        <section class="page product-detail-page" id="productDetailPage">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#" data-page="home">Home</a>
+                    <span>/</span>
+                    <a href="#" data-page="products" id="productCategoryLink">Category</a>
+                    <span>/</span>
+                    <span id="productName">Product</span>
+                </div>
+                
+                <div class="product-detail" id="productDetail">
+                    <!-- Product detail loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section class="page cart-page" id="cartPage">
+            <div class="container">
+                <h1 class="page-title">Shopping Cart</h1>
+                
+                <div class="cart-layout" id="cartLayout">
+                    <!-- Cart loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Page -->
+        <section class="page checkout-page" id="checkoutPage">
+            <div class="container">
+                <h1 class="page-title">Checkout</h1>
+                
+                <div class="checkout-layout" id="checkoutLayout">
+                    <!-- Checkout loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section class="page auth-page" id="loginPage">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <span class="logo-icon">⚡</span>
+                        <h1>Welcome Back</h1>
+                        <p>Sign in to continue to MinuteMart</p>
+                    </div>
+                    <form class="auth-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox"> Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+                        <div class="social-login">
+                            <button type="button" class="social-btn google">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button type="button" class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="#" data-page="signup">Sign Up</a></p>
+                    </div>
+                </div>
+                <div class="auth-visual">
+                    <div class="auth-illustration">
+                        <div class="illustration-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                        </div>
+                        <div class="illustration-content">
+                            <h2>Start Shopping Today</h2>
+                            <p>Join millions of happy customers and discover amazing deals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signup Page -->
+        <section class="page auth-page" id="signupPage">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <span class="logo-icon">⚡</span>
+                        <h1>Create Account</h1>
+                        <p>Join MinuteMart for exclusive deals</p>
+                    </div>
+                    <form class="auth-form" id="signupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="signupFirstName">First Name</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="signupFirstName" placeholder="First name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signupLastName">Last Name</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="signupLastName" placeholder="Last name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPhone">Phone Number</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="signupPhone" placeholder="Enter your phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signupPassword" placeholder="Create password" required minlength="6">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="passwordStrength"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="terms-checkbox">
+                                <input type="checkbox" required>
+                                <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="#" data-page="login">Sign In</a></p>
+                    </div>
+                </div>
+                <div class="auth-visual">
+                    <div class="auth-illustration">
+                        <div class="illustration-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                        </div>
+                        <div class="illustration-content">
+                            <h2>Join MinuteMart</h2>
+                            <p>Create your account and unlock exclusive benefits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section class="page dashboard-page" id="dashboardPage">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1 class="page-title">My Dashboard</h1>
+                    <p class="welcome-text">Welcome back, <span id="dashboardUserName">User</span>!</p>
+                </div>
+                
+                <div class="dashboard-grid" id="dashboardContent">
+                    <!-- Dashboard loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Page -->
+        <section class="page orders-page" id="ordersPage">
+            <div class="container">
+                <h1 class="page-title">My Orders</h1>
+                
+                <div class="orders-content" id="ordersContent">
+                    <!-- Orders loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Wishlist Page -->
+        <section class="page wishlist-page" id="wishlistPage">
+            <div class="container">
+                <h1 class="page-title">My Wishlist</h1>
+                
+                <div class="wishlist-content" id="wishlistContent">
+                    <!-- Wishlist loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Page -->
+        <section class="page profile-page" id="profilePage">
+            <div class="container">
+                <h1 class="page-title">My Profile</h1>
+                
+                <div class="profile-content" id="profileContent">
+                    <!-- Profile loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <a href="/" class="footer-logo">
+                            <span class="logo-icon">⚡</span>
+                            <span class="logo-text">Minute<span class="logo-highlight">Mart</span></span>
+                        </a>
+                        <p class="footer-description">
+                            Your one-stop destination for all your shopping needs. 
+                            Experience the future of e-commerce with MinuteMart.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-title">Customer Service</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Track Order</a></li>
+                            <li><a href="#">Returns & Refunds</a></li>
+                            <li><a href="#">Shipping Info</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3 class="footer-title">Contact Info</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City</li>
+                            <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                            <li><i class="fas fa-envelope"></i> support@minutemart.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 MinuteMart. All rights reserved.</p>
+                    <div class="payment-methods">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png" alt="Visa" height="20">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="Mastercard" height="20">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/200px-UPI-Logo-vector.svg.png" alt="UPI" height="20">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" id="quickViewContent">
+            <!-- Quick view loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
+
